@@ -1,7 +1,10 @@
 const Product = require('../models/product.js')
+const ProductFilter = require('../utils/productFilter.js')
 
 const allProducts = async(req, res) => {
-    const products = await Product.find()
+    const resultPerPage = 10 //sayfada max 10 sonuç gözüksün
+    const productFilter = new ProductFilter(Product.find(), req.query).search().filter().pagination(resultPerPage)
+    const products = await productFilter.query
 
     res.status(200).json({
         products

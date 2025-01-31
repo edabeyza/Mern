@@ -1,4 +1,4 @@
-const express = required("express")
+const express = require("express")
 const {allProducts, detailProducts, createProduct, deleteProduct, updateProduct} = require('../controllers/product.js')
 
 const router = express.Router()
