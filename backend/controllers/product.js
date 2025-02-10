@@ -12,6 +12,14 @@ const allProducts = async(req, res) => {
     })
 }
 
+const adminProducts = async (req, res, next) => {
+    const products = await Product.find()
+
+     res.status(200).json({
+        products
+     })
+}
+
 // http://localhost:4000/products?keyword="deneme"
 //kişi productlar içerisindeki deneme içeren şeyi aramak isterse
 
@@ -131,4 +139,4 @@ const createReview = async (req, res, next) => {
 }
 
 
-module.exports = {allProducts, detailProducts, createProduct, deleteProduct, updateProduct, createReview}
+module.exports = {allProducts, detailProducts, createProduct, deleteProduct, updateProduct, createReview, adminProducts}
