@@ -5,9 +5,17 @@ const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv')
 const db = require('./config/db.js')
 const product = require('./routes/product.js')
+const cloudinary = require('cloudinary').v2
 
 /* --------------------------------- dotenv --------------------------------- */
 dotenv.config()
+
+  // Configuration
+  cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
+});
 
 /* --------------------------------- express -------------------------------- */
 const app = express()
