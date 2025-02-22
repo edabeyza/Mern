@@ -33,7 +33,32 @@ const register = async(req, res) => {
 }
 
 const login = async(req, res) => {
-    
+    const {email, password} = req.body
+
+    const user = await User.findOne({email})
+
+    if(!user){
+        return res.status(500).json({message: 'No such user found !!'})
+    }
+
+    const comparePassword = await bcrypt.compare(password, user.password)
+
+    if(!comparePassword){
+        return res.status(500).json({message: 'You entered the wrong password !!'})
+
+    }
+
+    const token = await jwt.sign({id: user._id}, "SECRETTOKEN", {expiresIn: "lh"})
+
+    const cookieOptions = {
+        httpOnly: true,
+        expires: new Date(Date.now() + 5 + 24*60*60*1000)
+    }
+
+    res.status(200).cookie("token", token, cookieOptions).json({
+        user,
+        token
+    })
 }
 
 const logout = async(req, res) => {
