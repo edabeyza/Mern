@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv')
 const db = require('./config/db.js')
 const product = require('./routes/product.js')
+const user = require('./routes/user.js')
 const cloudinary = require('cloudinary').v2
 
 /* --------------------------------- dotenv --------------------------------- */
@@ -31,6 +32,7 @@ app.use(bodyParser.urlencoded({limit:"30mb", extended: true}))
 app.use(cookieParser())
 
 app.use('/', product)
+app.use('/', user)
 
 /* ------------------------------ dbConnection ------------------------------ */
 db()
