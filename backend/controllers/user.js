@@ -63,6 +63,9 @@ const login = async(req, res) => {
 
 const logout = async(req, res) => {
     
+    res.status(200).cookie("token", null, cookieOptions).json({
+        message: "Logout succesfull !!"
+    })
 }
 
 const forgotPassword = async(req, res) => {
